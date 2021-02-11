@@ -139,5 +139,5 @@ async def on_message(message):
                 await message.channel.send(resp[:2000])        
 
 #token = os.environ.get("DISCORD_BOT_SECRET")
-token = 'ODA4NjI4MDAxMjQ3MzMwMzA1.YCJTgw.MQY4WdHStAqO2gCbEzd48lKBKlM'
+token = ""
 client.run(token)
