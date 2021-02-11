@@ -130,14 +130,15 @@ async def on_message(message):
         else :
             if message.content in ['0','1','2']: 
                 topic = topics[int(message.content)]
+                print(topic)
                 print('Ok, what do you want to know about :', topic)
                 await message.channel.send('Ok, what do you want to know about : %s'%topic)
-            if topic != "":
+            if topic in topics:
                 print(topic)
                 await message.channel.send('Can you tell me more ?')  
                 resp = search.find_question_answer(message.content,topic)
                 await message.channel.send(resp[:2000])        
 
 #token = os.environ.get("DISCORD_BOT_SECRET")
-token = 'ODA4NjI4MDAxMjQ3MzMwMzA1.YCJTgw.MQY4WdHStAqO2gCbEzd48lKBKlM'
+token = 'a completer'
 client.run(token)
