@@ -10,6 +10,7 @@ import discord, search
 #import os
 
 from nltk.chat.util import Chat, reflections
+#import chatter_bot
 
 welcome_message = ["Here are all the topics we can talk about ! Just choose one with its key:  0 : data_sciences, 1 : travel , 2 : music"]
 topics = ['data_sciences', 'travel','music']
@@ -33,7 +34,7 @@ pairs = [
         ["How can I help you ?",]
     ],
     [
-        r"what can you tell me about (.*)",
+        r"what about (.*)",
         welcome_message
     ],
      [
@@ -84,10 +85,7 @@ pairs = [
     ],
 [
         r"(.*)raining in (.*)",
-        ["No rain since last week here in %2","Damn its raining too much here in %2"]
-    ],
-    [
-        r"how (.*) health(.*)",
+        ["No rain since laimit.*)",
         ["I'm a computer program, so I'm always healthy ",]
     ],
     [
@@ -107,6 +105,10 @@ pairs = [
         ["BBye take care. See you soon :) ","It was nice talking to you. See you soon :)"]
 
 ],
+[
+        r"bye",nltk.chate take care. See you soon :) ","It was nice talking to you. See you soon :)"]
+
+]
 ]
 
 client = discord.Client()
@@ -123,7 +125,6 @@ chat = Chat(pairs, reflections)
 async def on_message(message):
     global topic
     if message.author != client.user:
-        #await message.channel.send(message.content[::-1])
         if chat.respond(message.content):
             await message.channel.send(chat.respond(message.content))
             print(message.content)
@@ -133,12 +134,16 @@ async def on_message(message):
                 print(topic)
                 print('Ok, what do you want to know about :', topic)
                 await message.channel.send('Ok, what do you want to know about : %s'%topic)
-            if topic in topics:
+            try:
                 print(topic)
-                await message.channel.send('Can you tell me more ?')  
+                #await message.channel.send('Can you tell me more ?') 
+                #traitement de la question utilisateur pour recuperer l'objet de la question
                 resp = search.find_question_answer(message.content,topic)
-                await message.channel.send(resp[:2000])        
+                await message.channel.send(resp[:2000])
+            except NameError:
+                await message.channel.send('Do you have another question ?')
 
-#token = os.environ.get("DISCORD_BOT_SECRET")
-token = 'a completer'
+
+           
+token = '...'
 client.run(token)
