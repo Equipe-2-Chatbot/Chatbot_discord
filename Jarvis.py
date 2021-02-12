@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Feb  9 13:10:08 2021
-
 @author: pierre-etienne
 """
 
@@ -12,7 +11,7 @@ import discord, search
 from nltk.chat.util import Chat, reflections
 #import chatter_bot
 
-welcome_message = ["Here are all the topics we can talk about ! Just choose one with its key:  0 : data_sciences, 1 : travel , 2 : music"]
+welcome_message = ["How can I help you ? Here are all the topics we can talk about ! Just choose one with its key:  0 : data_sciences, 1 : travel , 2 : music"]
 topics = ['data_sciences', 'travel','music']
 
 def print_topics():
@@ -31,7 +30,7 @@ pairs = [
     ],
     [
         r"/help",
-        ["How can I help you ?",]
+        welcome_message
     ],
     [
         r"what about (.*)",
@@ -85,8 +84,7 @@ pairs = [
     ],
 [
         r"(.*)raining in (.*)",
-        ["No rain since laimit.*)",
-        ["I'm a computer program, so I'm always healthy ",]
+        ["No rain since last time.*)"]
     ],
     [
         r"(.*) (sports|game) ?",
@@ -102,11 +100,7 @@ pairs = [
 ],
     [
         r"quit",
-        ["BBye take care. See you soon :) ","It was nice talking to you. See you soon :)"]
-
-],
-[
-        r"bye",nltk.chate take care. See you soon :) ","It was nice talking to you. See you soon :)"]
+        ["Bye take care. See you soon :) ","It was nice talking to you. See you soon :)"]
 
 ]
 ]
@@ -145,5 +139,5 @@ async def on_message(message):
 
 
            
-token = '...'
+token = 'ODA4NjI4MDAxMjQ3MzMwMzA1.YCJTgw.q3iFqgMcFIEH1_xKcTszXztSeDc'
 client.run(token)
