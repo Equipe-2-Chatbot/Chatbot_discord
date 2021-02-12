@@ -11,6 +11,7 @@ import html2markdown
 def find_question_answer(msg, topic):
     client = MongoClient("localhost", 27017)
     db = client["stackexchange"]
+    #Faire une recherche par tags, tiltle et body dans cet ordre
     question = db.get_collection(topic).find(
             { "$text": { "$search": msg } }).sort([("@Score",-1)]).limit(1)
     question = list(question) 
