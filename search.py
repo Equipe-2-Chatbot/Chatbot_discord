@@ -6,13 +6,17 @@ Created on Mon Nov 16 00:13:18 2020
 @author: roger
 """
 from pymongo import MongoClient
-import html2markdown
+from bs4 import BeautifulSoup
 
 def find_question_answer(msg, topic):
     client = MongoClient("localhost", 27017)
     db = client["stackexchange"]
     #Faire une recherche par tags, tiltle et body dans cet ordre
     question = db.get_collection(topic).find(
+            { "$text": { "$search": "\"" + msg + "\"" } }).sort([("@Score",-1)]).limit(1)
+    question = list(question) 
+    if question ==[] : 
+        question = db.get_collection(topic).find(
             { "$text": { "$search": msg } }).sort([("@Score",-1)]).limit(1)
     question = list(question) 
     if question !=[] : 
@@ -21,7 +25,9 @@ def find_question_answer(msg, topic):
         resp = db.get_collection(topic).find({"@ParentId":questId}).sort([('@Score', -1)]).limit(1)
         resp = list(resp)
         if resp !=[] : 
-            resp = html2markdown.convert(resp[0]['@Body'])
+            print('resp ID',resp[0]['@Id'])
+            resp = BeautifulSoup(resp[0]['@Body'], "lxml").text
+            
         else:
             resp = 'Can you precise your question ?'    
     else :

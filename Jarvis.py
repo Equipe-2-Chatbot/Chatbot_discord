@@ -9,19 +9,24 @@ import discord, search
 #import os
 
 from nltk.chat.util import Chat, reflections
-#import chatter_bot
+import chatter_bot
+from bs4 import BeautifulSoup
+import html2markdown
 
-welcome_message = ["How can I help you ? Here are all the topics we can talk about ! Just choose one with its key:  0 : data_sciences, 1 : travel , 2 : music"]
-topics = ['data_sciences', 'travel','music']
+#welcome_message = open("/home/roger/anaconda3/projetIA/Chat_bot/ChatBot/welcome_message.html").read()
+#welcomme_message = [BeautifulSoup(welcome_message, "lxml").text]
+
+welcome_message = [html2markdown.convert("<p>How can I help you ? Here are all the topics we can talk about ! Just choose one with its key:<br>0 : Data_sciences<br>1 : Artificial Intelligence<br>2 : Travel<br>3 : Music<br>4 : Movies<br>5 : English</p>")]
+
+topics = ['data_sciences', 'ai', 'travel','music','movies','english']
+keys = ['0','1','2','3','4','5']
 
 def print_topics():
     for k, v in enumerate(topics):
         print(k, v)
 def append_topics(welcome_message):
     for v in topics:
-        welcome_message.append(v)  
-
-#append_topics(welcome_message)
+        welcome_message.append(v) 
 
 pairs = [
     [
@@ -33,12 +38,16 @@ pairs = [
         welcome_message
     ],
     [
+        r"/h",
+        welcome_message
+    ],
+    [
         r"what about (.*)",
         welcome_message
     ],
      [
         r"what is your name ?",
-        ["My name is Chatty and I'm a chatbot ?",]
+        ["My name is Jarvis and I'm a chatbot ?",]
     ],
     [
         r"how are you ?",
@@ -98,6 +107,11 @@ pairs = [
         r"who (.*) (moviestar|actor)?",
         ["Brad Pitt"]
 ],
+[
+        r"bye",
+        ["Bye take care. See you soon :) ","It was nice talking to you. See you soon :)"]
+
+],
     [
         r"quit",
         ["Bye take care. See you soon :) ","It was nice talking to you. See you soon :)"]
@@ -123,7 +137,7 @@ async def on_message(message):
             await message.channel.send(chat.respond(message.content))
             print(message.content)
         else :
-            if message.content in ['0','1','2']: 
+            if message.content in keys: 
                 topic = topics[int(message.content)]
                 print(topic)
                 print('Ok, what do you want to know about :', topic)
@@ -132,12 +146,13 @@ async def on_message(message):
                 print(topic)
                 #await message.channel.send('Can you tell me more ?') 
                 #traitement de la question utilisateur pour recuperer l'objet de la question
-                resp = search.find_question_answer(message.content,topic)
-                await message.channel.send(resp[:2000])
+                if message.content not in keys: 
+                    resp = search.find_question_answer(message.content,topic)
+                    await message.channel.send(resp[:2000])
             except NameError:
-                await message.channel.send('Do you have another question ?')
+                resp = chatter_bot.chatter_bot_conv(message.content)
+                await message.channel.send(resp)                
 
-
-           
+        
 token = '...'
 client.run(token)

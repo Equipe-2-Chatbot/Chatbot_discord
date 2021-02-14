@@ -13,10 +13,10 @@ import xmltodict
 client = MongoClient("localhost", 27017)
 db = client["stackexchange"]
 
-with open('data/music/Posts.xml') as fd:
+with open('Posts.xml') as fd:
     posts = xmltodict.parse(fd.read())
 
-posts_collection = db["music"]
+posts_collection = db["english"]
     
 for data in posts['posts']['row']:
     posts_collection.insert_one(data)
