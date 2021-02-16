@@ -48,6 +48,5 @@ async def on_message(message):
                 await message.channel.send('Can you tell me more ?')                        
 
         
-token = 'ODA4NjI4MDAxMjQ3MzMwMzA1.YCJTgw.kyL8xZKyBs1Yw82KEPPIIpZFZG8'
-# token = 'ODA4NjQ1ODkzOTk2ODA2MTU0.YCJkLQ.4mLKI_wpqCKsln25zD3BKSeOWgY'
+token = 
 client.run(token)
