@@ -51,6 +51,5 @@ async def on_message(message):
             await message.channel.send(library.bot_end_conv[0])
         #await message.channel.send(msg)       
         
-token = 'ODA4NjI4MDAxMjQ3MzMwMzA1.YCJTgw.RV-OiRYAtKL4ia0WuIWHYqh4ZQc'
-#token = 'ODA4NjQ1ODkzOTk2ODA2MTU0.YCJkLQ._F8gfl_Rxs_oh9foJ06h1PjbCcs'
+token = ''
 client.run(token)
