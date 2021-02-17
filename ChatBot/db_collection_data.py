@@ -16,7 +16,7 @@ db = client["stackexchange"]
 with open('Posts.xml') as fd:
     posts = xmltodict.parse(fd.read())
 
-posts_collection = db["english"]
+posts_collection = db["ai"]
     
 for data in posts['posts']['row']:
     posts_collection.insert_one(data)

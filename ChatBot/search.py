@@ -21,6 +21,7 @@ def find_question_answer(msg, topic):
     exp = "\"" + msg + "\""
     print(exp)
     question = search(exp,db,topic)
+    print(question)
     question = list(question)
     print("exacte Q",question) 
     if question ==[] :

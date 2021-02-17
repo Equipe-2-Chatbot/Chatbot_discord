@@ -1,19 +1,33 @@
 import html2markdown
 
-welcome_message = html2markdown.convert("<p>I can help you with /help or /h ? Here are all the topics we can talk about ! Just choose one with its key:<br>0 : Data_sciences<br>1 : Artificial Intelligence<br>2 : Travel<br>3 : Music<br>4 : Movies<br>5 : English</p>")
-                    
+welcome_mess1 = (
+'''```
+      I can help you , just write at any time :  
+      /help or /h  
+      Here are all the topics we can talk about !    
+      Just choose one with its key:  
+      0 : Data_sciences  
+      1 : Artificial Intelligence  
+      2 : Travel  
+      3 : Music  
+      4 : Movies  
+      5 : English  
+```''')
+
+                      
 english_conv = [
     "/help",
-    welcome_message,
+    welcome_mess1,
     "/help",
-    welcome_message,
+    welcome_mess1,
     "/h",
-    welcome_message,
+    welcome_mess1,
     "/h",
-    welcome_message,
+    welcome_mess1,
     "hello",
-    "Hello I am Jarvis. " + welcome_message,
-    "Hi there! I am Jarvis. "+ welcome_message,
+    "Hello I am Jarvis. " + welcome_mess1,
+    "Hi there! I am Jarvis. "+ welcome_mess1,
+    welcome_mess1,
     "what is your name",
     "My name is Jarvis",
     "how are you ",
@@ -48,7 +62,7 @@ french_conv = ['bonjour',
     'tu sais parler français',
     'Oui, je sais',
     'bonjour comment vas tu',
-   'Je vais bien merci, et toi ?',
+    'Je vais bien merci, et toi ?',
    'ca va',
    'ca va bien ?'
    'comment tu vas',
@@ -59,6 +73,8 @@ french_conv = ['bonjour',
    'Salut',
   'qui es tu',
    'Je suis Jarvis, le super bot, je cherche les réponses aux questions sur des sujets divers',
+   "qu est ce tu connais",
+    welcome_mess1,
    'sur quoi travailles tu',
   'Je travaille sur un projet',
   'quels langages utilises tu',   
@@ -154,29 +170,29 @@ greetings = [
 
 conversations  =[
     "Good morning, how are you?",
-   "I am doing well, how about you?",
-   "I'm also good.",
-   "That's good to hear.",
-   "Yes it is.",
- "Hello",
-   "Hi",
-   "How are you doing?",
-   "I am doing well.",
-   "That is good to hear",
-   "Yes it is.",
-    "Can I help you with anything?",
-   "Yes, I have a question.",
-   "What is your question?",
-   "Could I borrow a cup of sugar?",
-   "I'm sorry, but I don't have any.",
-   "Thank you anyway",
-   "No problem",
-  "How are you doing?",
-   "I am doing well, how about you?",
-   "I am also good.",
-   "That's good.",
-  "Have you heard the news?",
-   "What good news?",
+    "I am doing well, how about you?",
+    "I'm also good.",
+    "That's good to hear.",
+    "Yes it is.",
+    "Hello",
+    "Hi",
+    "How are you doing?",
+    "I am doing well.",
+    "That is good to hear",
+    "Yes it is.",
+    "can i help you with anything",
+    "Yes, I have a question.",
+    "What is your question?",
+    "Could I borrow a cup of sugar?",
+    "I'm sorry, but I don't have any.",
+    "Thank you anyway",
+    "No problem",
+    "How are you doing?",
+    "i am doing well how about you",
+    "I am also good.",
+    "That's good.",
+    "Have you heard the news?",
+    "What good news?",  
   "What is your favorite book?",
    "I can't read.",
    "So what's your favorite color?",
@@ -283,5 +299,12 @@ conversations  =[
    "We'd like it to be able to identify the type of bird in the photo.",
    "Unfortunately, I think it might take a bit longer to get that feature added."
 ]
+
+end_of_conv = [
+  "Une autre question ?",
+  "As-tu d'autres questions en tête ?"
+]
+
+bot_end_conv = ['Je suis ravi d\'avoir discuté avec toi, est-ce que tu peux dire ce que tu penses de moi, je vais m\'améliorer avec ta réponse. Merci']
 
 lib = french_conv + english_conv + jap_conv + greetings + conversations
