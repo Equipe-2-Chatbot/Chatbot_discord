@@ -6,7 +6,6 @@ Created on Mon Nov 16 00:13:18 2020
 @author: roger
 """
 
-import json
 from pymongo import MongoClient
 import xmltodict
 
@@ -16,7 +15,7 @@ db = client["stackexchange"]
 with open('Posts.xml') as fd:
     posts = xmltodict.parse(fd.read())
 
-posts_collection = db["ai"]
+posts_collection = db["english"]
     
 for data in posts['posts']['row']:
     posts_collection.insert_one(data)
