@@ -279,7 +279,7 @@ conversations  =[
 ]
 
 end_of_conv = [
-  "```Pour avoir la liste des sujets``` **/h** ```Une autre question ?```Tu peux juste ** poser ta question ** ou repondre par **non** et tagger avec :thumbsup:"]
+  "```Pour avoir la liste des sujets  ** /h **.  Une autre question ?```Tu peux juste ** poser ta question ** ou repondre par **non** et tagger avec ",":thumbsup:"]
 
 
 bot_end_conv = ['Je suis ravi d\'avoir discuté avec toi, est-ce que tu peux dire ce que tu penses de moi, je vais m\'améliorer avec ta réponse. Merci']

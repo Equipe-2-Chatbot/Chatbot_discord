@@ -12,7 +12,7 @@ import pickle
 
 
 topics = ['data_sciences', 'artificial_intelligence', 'travel','music','movies','english']
-keys = ['0','1','2','3','4','5']
+
 
 client = discord.Client()
 
@@ -31,7 +31,7 @@ async def on_ready():
 async def on_message(message):
     global topic, end, save, lan, found
     #traduction message user
-    if message.content not in ['/help','/h'] and message.content not in keys:
+    if message.content not in ['/help','/h']:
         ms,lan = preproc.transin(message.content)
         msg = preproc.prep(ms)
     else:
@@ -39,9 +39,11 @@ async def on_message(message):
     
     if message.author != client.user:
         if msg in library.lib and end !=True :
+            if msg in ['hello'] or message.content in ['/help','/h']:       
+                await message.channel.send(file=discord.File('/home/roger/anaconda3/projetIA/Chat_bot/ChatBot/robot.png'))
             res = ct.chatter_bot_conv(msg)
             #reponse dans la langue user
-            resp = preproc.transout(res,lan)
+            resp = preproc.transout(res,lan) 
             await message.channel.send(resp)             
         else:   
             try:
@@ -57,8 +59,8 @@ async def on_message(message):
                     response = preproc.transout('Pouvez-vous m\'en dire plus ?',lan)
                     await message.channel.send(response)                        
         # fin de conversation
-        if found == True and msg not in library.lib and preproc.transout(msg,'fr') != 'non' and preproc.transout(msg,'fr') != 'oui'and msg not in keys and end !=True:
-            resp = preproc.transout(library.end_of_conv[0], lan)
+        if found == True and msg not in library.lib and preproc.transout(msg,'fr') != 'non' and preproc.transout(msg,'fr') != 'oui'and end !=True:
+            resp = preproc.transout(library.end_of_conv[0], lan)+library.end_of_conv[1]
             await message.channel.send(resp)
         if preproc.transout(msg,'fr') == 'non':
             resp = preproc.transout(library.bot_end_conv[0],lan)
@@ -70,5 +72,5 @@ async def on_message(message):
             save = True                        
         
 
-token = ''
+#token = ''
 client.run(token)

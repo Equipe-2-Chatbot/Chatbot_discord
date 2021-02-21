@@ -41,7 +41,7 @@ def clean_ponctuation(statement):
 #     clean_ponctuation
 # )
 
-#bot.storage.drop()
+bot.storage.drop()
 
 trainer = ListTrainer(bot)
 lib = [library.english_conv, library.greetings, library.conversations]
