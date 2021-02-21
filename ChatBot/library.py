@@ -2,22 +2,7 @@ import html2markdown
 import yaml
 import string 
 
-# with open("/home/roger/anaconda3/projetIA/Chat_bot/ChatBot/french_conversations.yml", 'r') as stream:
-#   out = yaml.load(stream)
-#   dico = out['conversations']
-
-# french_conversation = []
-# for elt in dico:
-#   french_conversation+=elt
-
-# french_conv2 = []
-# for elt in french_conversation:
-#   elt = elt.replace('-',' ').replace('\'',' ')
-#   elt = elt.translate(str.maketrans("","", string.punctuation)) 
-#   elt = elt.lower()
-#   french_conv2.append(elt)
-
-welcome_mess1 = "*I can help you , just write at any time :*```/help or /h```**Just choose one the keys** of the topics we can talk about ! ```0 : Data_sciences ```1 : Artificial Intelligence ```2 : Travel ```3 : Music ```4 : Movies  ```5 : English"
+welcome_mess1 = "```I can help you , just write at any time :```**/help or /h **```We can```** discuss in any language on these topics : **  Data sciences, Artificial Intelligence, Quantum computing, Travel, Music, Movies"
                           
 english_conv = [
     "/help",
@@ -191,7 +176,7 @@ conversations  =[
     "No problem",
     "how are you doing",
     "i am doing well how about you",
-    "i am also good",
+    "I am also good",
     "That's good.",
     "have you heard the news",
     "What good news?",  
@@ -212,6 +197,9 @@ conversations  =[
     "are you a robot",
     "Yes I am.",
     "what is it like",
+    "I feel like SMART",
+    "what are the subjects you master",
+    "Data sciences, Artificial Intelligence, Quantum computing, Travel, Music, Movies",
     "What is it that you want to know?",
     "complex is better than complicated",
     "Simple is better than complex.",
@@ -291,10 +279,9 @@ conversations  =[
 ]
 
 end_of_conv = [
-  " ```Pour avoir la liste des sujets``` **/h** ``` Une autre question ?``` Tu peux juste répondre **oui** ou **non** et tagger avec :thumbsup:",
-  "As-tu d'autres questions en tête ? oui/non"
-]
+  "```Pour avoir la liste des sujets``` **/h** ```Une autre question ?```Tu peux juste ** poser ta question ** ou repondre par **non** et tagger avec :thumbsup:"]
+
 
 bot_end_conv = ['Je suis ravi d\'avoir discuté avec toi, est-ce que tu peux dire ce que tu penses de moi, je vais m\'améliorer avec ta réponse. Merci']
 
-lib = french_conv + english_conv + jap_conv + greetings + conversations
+lib = english_conv + greetings + conversations

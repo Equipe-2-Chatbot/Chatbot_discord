@@ -41,13 +41,12 @@ def clean_ponctuation(statement):
 #     clean_ponctuation
 # )
 
-bot.storage.drop()
+#bot.storage.drop()
 
 trainer = ListTrainer(bot)
-lib = [library.french_conv, library.english_conv, library.jap_conv, library.greetings, library.conversations]
+lib = [library.english_conv, library.greetings, library.conversations]
 for l in lib:
     trainer.train(l)
-trainer.train(library.english_conv)
 
 # trainer = ChatterBotCorpusTrainer(bot)
 # trainer.train('chatterbot.corpus.english.conversations')
