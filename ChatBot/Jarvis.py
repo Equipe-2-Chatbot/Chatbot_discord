@@ -9,7 +9,6 @@ import preprocessing as preproc
 import datetime, time
 import chatter_bot as ct
 import pickle
-from discord import ext
 
 
 topics = ['data_sciences', 'artificial_intelligence', 'travel','music','movies','english']
@@ -27,8 +26,6 @@ with open('/home/roger/anaconda3/projetIA/Chat_bot/ChatBot/topic_classifier.pkl'
 @client.event
 async def on_ready():
     print("Hello I am ", client.user)
-    embed=discord.Embed(title="Jarvis", url="https://photos.google.com/search/_tra_", description="I am a bot", color=0x000000)
-    await ctx.send(embed=embed)
 
 @client.event
 async def on_message(message):
