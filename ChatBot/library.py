@@ -2,7 +2,7 @@ import html2markdown
 import yaml
 import string 
 
-welcome_mess1 = "```I can help you , just write at any time :```**/help or /h **```We can```** discuss in any language on these topics : **  Data sciences, Artificial Intelligence, Quantum computing, Travel, Music, Movies"
+welcome_mess1 = "```I can help you , just write at any time :```**/help or /h **```We can```** discuss in any language (more than 100) on these topics : **  Data sciences, Artificial Intelligence, Quantum computing, Travel, Music, Movies"
                           
 english_conv = [
     "/help",

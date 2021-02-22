@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Feb  9 13:10:08 2021
-@author: pierre-etienne
+@author: pierre-etienne, roger
 """
 import discord, search, library, feed_back
 import preprocessing as preproc
@@ -13,12 +13,11 @@ import pickle
 
 topics = ['data_sciences', 'artificial_intelligence', 'travel','music','movies','english']
 
-
 client = discord.Client()
 
-end = False
-save = False
 found = False
+channel_closed = []
+channel_comment_saved = []
 
 with open('/home/roger/anaconda3/projetIA/Chat_bot/ChatBot/topic_classifier.pkl','rb') as file:
     topic_clf = pickle.load(file)
@@ -29,7 +28,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    global topic, end, save, lan, found
+    global topic, lan, found, channel_closed, channel_comment_saved
     #traduction message user
     if message.content not in ['/help','/h']:
         ms,lan = preproc.transin(message.content)
@@ -38,16 +37,19 @@ async def on_message(message):
         msg = message.content   
     
     if message.author != client.user:
-        if msg in library.lib and end !=True :
+        #Gestion de la conversation
+        if msg in library.lib and message.channel.name not in channel_closed :
+            print(message.channel)
             if msg in ['hello'] or message.content in ['/help','/h']:       
                 await message.channel.send(file=discord.File('/home/roger/anaconda3/projetIA/Chat_bot/ChatBot/robot.png'))
             res = ct.chatter_bot_conv(msg)
             #reponse dans la langue user
             resp = preproc.transout(res,lan) 
             await message.channel.send(resp)             
-        else:   
+        else:
+            #Gestion de la recherche en bdd   
             try:
-                if msg not in library.lib and preproc.transout(msg,'fr') != 'non' and preproc.transout(msg,'fr') != 'oui' and end !=True: 
+                if msg not in library.lib and preproc.transout(msg,'en') != 'no' and preproc.transout(msg,'en') != 'yes' and message.channel.name not in channel_closed: 
                     topic = topic_clf.predict([msg])[0]
                     print("search",topic_clf.predict([msg])[0])
                     resp = search.find_question_answer(msg,topic)
@@ -55,22 +57,21 @@ async def on_message(message):
                     resp = preproc.transout(resp,lan)
                     await message.channel.send(resp[:2000])
             except NameError:
-                if  preproc.transout(msg,'fr') != 'non' and end !=True:
+                if  preproc.transout(msg,'en') != 'no' and message.channel.name not in channel_closed:
                     response = preproc.transout('Pouvez-vous m\'en dire plus ?',lan)
                     await message.channel.send(response)                        
         # fin de conversation
-        if found == True and msg not in library.lib and preproc.transout(msg,'fr') != 'non' and preproc.transout(msg,'fr') != 'oui'and end !=True:
+        if found == True and msg not in library.lib and preproc.transout(msg,'en') != 'no' and preproc.transout(msg,'en') != 'yes'and message.channel.name not in channel_closed:
             resp = preproc.transout(library.end_of_conv[0], lan)+library.end_of_conv[1]
             await message.channel.send(resp)
-        if preproc.transout(msg,'fr') == 'non':
+        if preproc.transout(msg,'en') == 'no':
             resp = preproc.transout(library.bot_end_conv[0],lan)
             await message.channel.send(resp)
-            end = True
-        if preproc.transout(msg,'fr') != 'non' and end == True and save == False:
+            channel_closed.append(message.channel.name)
+        if preproc.transout(msg,'en') != 'no' and message.channel.name in channel_closed and message.channel.name not in channel_comment_saved:
             feed_back.add_feeback({"message":message.content,
-                                    "date":str(datetime.date.today())}) 
-            save = True                        
-        
+                                    "date":str(datetime.date.today())})
+            channel_comment_saved.append(message.channel.name)
 
-#token = ''
+token = ''
 client.run(token)
