@@ -2,7 +2,7 @@ import html2markdown
 import yaml
 import string 
 
-welcome_mess1 = "```I can help you , just write at any time :```**/help or /h **```We can```** discuss in any language (more than 100) on these topics : **  Data sciences, Artificial Intelligence, Quantum computing, Travel, Music, Movies"
+welcome_mess1 = "```I can help you , just write at any time :```** /help or /h **```We can```** discuss in any language (more than 100) on these topics : **  Data sciences, Artificial Intelligence, Quantum computing, Travel, Music, Movies"
                           
 english_conv = [
     "/help",
@@ -279,7 +279,7 @@ conversations  =[
 ]
 
 end_of_conv = [
-  "```Pour avoir la liste des sujets  ** /h **.  Une autre question ?```Tu peux juste ** poser ta question ** ou repondre par **non** et tagger avec ",":thumbsup:"]
+  "** Jarvis :** Pour avoir la liste des sujets ** /h ** Une autre question ? Tu peux juste ** poser ta question ** ou repondre par ** non ** et tagger avec ",":thumbsup:"]
 
 
 bot_end_conv = ['Je suis ravi d\'avoir discuté avec toi, est-ce que tu peux dire ce que tu penses de moi, je vais m\'améliorer avec ta réponse. Merci']

@@ -37,8 +37,7 @@ async def on_message(message):
     
     if message.author != client.user:
         #Gestion de la conversation
-        if msg in library.lib and message.channel.name not in channel_closed and comment_flag == False:
-            print(message.channel)
+        if msg in library.lib and comment_flag == False:
             if msg in ['hello'] or message.content in ['/help','/h']:       
                 await message.channel.send(file=discord.File('/home/roger/anaconda3/projetIA/Chat_bot/ChatBot/robot.png'))
             res = ct.chatter_bot_conv(msg)
@@ -62,16 +61,15 @@ async def on_message(message):
         # fin de conversation
         if found == True and msg not in library.lib and preproc.transout(msg,'en') != 'no' and preproc.transout(msg,'en') != 'yes'and comment_flag == False:
             resp = preproc.transout(library.end_of_conv[0], lan)+library.end_of_conv[1]
+            found = False
             await message.channel.send(resp)
         if preproc.transout(msg,'en') == 'no' and comment_flag == False:
             resp = preproc.transout(library.bot_end_conv[0],lan)
             await message.channel.send(resp)
             comment_flag = True
-            #channel_closed.append(message.channel.name)
         if preproc.transout(msg,'en') != 'no' and comment_flag == True :
             feed_back.add_feeback({"message":message.content,
                                     "date":str(datetime.date.today())})
-            #channel_comment_saved.append(message.channel.name)
             comment_flag = False
 
 
