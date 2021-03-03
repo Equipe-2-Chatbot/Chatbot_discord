@@ -4,14 +4,13 @@
   pip install -r requirements.txt
   
 # Data:
-  Comes from Stachexchange (in xml format)
+  Comes from Stachexchange (in xml format). 
   Use the db_collection_data.py to add the data to your Mongodb collections
 
 # Change the settings:
-  The token for your bot in Discord
-  The links to your project
+  The token for your bot in Discord and the links to your project
 
-# Launch the appliction :
+# Launch the application :
   Jarvis.py
   
 # Machine learning:
