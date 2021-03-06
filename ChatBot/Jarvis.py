@@ -4,6 +4,7 @@
 Created on Tue Feb  9 13:10:08 2021
 @author: pierre-etienne, roger
 """
+import os
 import discord, search, library, feed_back
 import preprocessing as preproc
 import datetime, time
@@ -18,7 +19,12 @@ client = discord.Client()
 found = False
 comment_flag = False
 
-with open('/home/roger/anaconda3/projetIA/Chat_bot/ChatBot/topic_classifier.pkl','rb') as file:
+
+target_classifier = os.path.join(os.path.dirname(__file__), 'topic_classifier.pkl')
+target_robot = os.path.join(os.path.dirname(__file__), 'robot.png')
+print('target_classifier: ', target_classifier)
+print('target_robot: ', target_robot)
+with open(target_classifier,'rb') as file:
     topic_clf = pickle.load(file)
 
 @client.event
@@ -39,7 +45,7 @@ async def on_message(message):
         #Gestion de la conversation
         if msg in library.lib and comment_flag == False:
             if msg in ['hello'] or message.content in ['/help','/h']:       
-                await message.channel.send(file=discord.File('/home/roger/anaconda3/projetIA/Chat_bot/ChatBot/robot.png'))
+                await message.channel.send(file=discord.File(target_robot))
             res = ct.chatter_bot_conv(msg)
             #reponse dans la langue user
             resp = preproc.transout(res,lan) 
